@@ -1,15 +1,32 @@
-const OrderType = (db, type) => {
-    return db.define('order_type', {
-        id: {
-            primaryKey: true,
-            autoIncrement: true,
-            type: type.INTEGER
-        },
-        name: {
-            type: type.STRING,
-            allowNull: false,
-        }
-    });
-}
-
-module.exports = OrderType;
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class OrderType extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      this.hasMany(models.order)
+    }
+  }
+  OrderType.init({
+    id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    }
+  }, {
+    sequelize,
+    modelName: 'OrderType',
+  });
+  return OrderType;
+};

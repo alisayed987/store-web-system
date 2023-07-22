@@ -1,19 +1,36 @@
-const Role = (db, type) => {
-    return db.define('role', {
-        id: {
-            primaryKey: true,
-            autoIncrement: true,
-            type: type.INTEGER
-        },
-        name: {
-            type: type.STRING,
-            allowNull: false,
-        },
-        discription: {
-            type: type.STRING,
-            allowNull: true,
-        }
-    });
-}
-
-module.exports = Role;
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Role extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      this.belongsTo(models.room)
+    }
+  }
+  Role.init({
+    id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    discription: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    }
+  }, {
+    sequelize,
+    modelName: 'role',
+  });
+  return Role;
+};

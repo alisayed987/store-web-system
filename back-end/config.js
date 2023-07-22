@@ -1,9 +1,9 @@
 require('dotenv').config();
 module.exports = {
     db: {
-        host: "localhost",
-        user: "root",
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
-        database: "gana_furniture",
+        database: process.env.DB_NAME,
       },
 }

@@ -13,6 +13,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      category_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "categories",
+          key: "id"
+        }
+      },
       price: {
         type: Sequelize.FLOAT,
         allowNull: false,

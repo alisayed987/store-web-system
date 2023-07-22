@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 require('dotenv').config();
 
-require('./database/db');
+const db = require('./database/db');
 
 app.use(express.json());
 app.use(
@@ -10,10 +10,7 @@ app.use(
     extended: true,
   })
 );
-//----------------------------------------------------------------------------------
-require("./database/models/DBModels");
 
-//---------------------------------------------------------------------------------
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });

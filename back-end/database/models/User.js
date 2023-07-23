@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Test.init({
+  User.init({
     id: {
         allowNull: false,
         autoIncrement: true,

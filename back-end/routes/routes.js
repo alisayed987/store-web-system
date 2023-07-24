@@ -10,9 +10,12 @@ const rolePermissions = require('./role-permissions');
 const roles = require('./roles');
 const tags = require('./tags');
 const users = require('./users');
-
+const cors = require('cors')
 module.exports = function (app, sequelize) {
     app.use(express.json());
+    app.use(cors({
+        origin: "*"
+    }));
     app.use(
         express.urlencoded({
             extended: true,

@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Ysf20192020",
+    "password": "root",
     "database": "gana_furniture",
     "host": "127.0.0.1",
     "dialect": "mysql"

@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      type_id: {
+      order_type_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "order_types",
@@ -38,11 +38,11 @@ module.exports = {
         allowNull: false,
         min: 0
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

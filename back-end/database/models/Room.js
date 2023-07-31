@@ -4,16 +4,13 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Room extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.Category)
+      this.belongsToMany(models.Item, { through: models.RoomItem })
+      this.belongsToMany(models.Order, { through: models.OrderRoom })
     }
   }
-  Test.init({
+  Room.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -50,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Room',
+    underscored: true
   });
   return Room;
 };

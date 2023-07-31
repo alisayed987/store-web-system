@@ -1,10 +1,8 @@
-const RoleModel = require('../database/models/Role');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Role = RoleModel(sequelize, DataTypes);
+  const Role = sequelize.models.Role;
 
   router.get('/', async (req, res) => {
     const roles = await Role.findAll();
@@ -35,7 +33,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, role);
       res.status(202).send(role);
     } catch (error) {
       res.status(400).send(error.message)

@@ -1,10 +1,8 @@
-const TagModel = require('../database/models/Tag');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Tag = TagModel(sequelize, DataTypes);
+  const Tag = sequelize.models.Tag;
 
   router.get('/', async (req, res) => {
     const tags = await Tag.findAll();
@@ -35,7 +33,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, tag);
       res.status(202).send(tag);
     } catch (error) {
       res.status(400).send(error.message)

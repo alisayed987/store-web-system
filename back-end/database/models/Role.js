@@ -4,13 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      this.belongsTo(models.room)
+      this.belongsToMany(models.Permission, { through: models.RolePermission })
+      this.belongsToMany(models.User, { through: models.UserRole })
     }
   }
   Role.init({
@@ -30,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'role',
+    modelName: 'Role',
+    underscored: true
   });
   return Role;
 };

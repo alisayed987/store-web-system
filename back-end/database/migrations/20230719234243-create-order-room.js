@@ -9,14 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      image_url: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
       order_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -31,11 +23,11 @@ module.exports = {
           key: "id"
         }
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

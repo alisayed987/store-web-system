@@ -1,10 +1,8 @@
-const OrderTypeModel = require('../database/models/OrderType');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const OrderType = OrderTypeModel(sequelize, DataTypes);
+  const OrderType = sequelize.models.OrderType;
 
   router.get('/', async (req, res) => {
     const orderTypes = await OrderType.findAll();
@@ -35,7 +33,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, orderType);
       res.status(202).send(orderType);
     } catch (error) {
       res.status(400).send(error.message)

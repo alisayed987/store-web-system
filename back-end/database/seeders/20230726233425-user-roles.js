@@ -2,23 +2,21 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('users', [{
-      name: "Ali Sayed",
-      email: "ali.sayed11298@gamil.com",
-      password: "ali12345",
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('user_roles', [{
+      user_id: 1,
+      role_id: 1,
       created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
       updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
-    },{
-      name: "Youssef Hussien",
-      email: "youssefhussien116@gmail.com",
-      password: "ysf12345",
+    }, {
+      user_id: 2,
+      role_id: 1,
       created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
       updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     }], {});
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('users', null, {});
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('user_roles', null, {});
   }
 };

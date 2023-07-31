@@ -1,18 +1,26 @@
-const RolePermissionModel = require('../database/models/RolePermission');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const RolePermission = RolePermissionModel(sequelize, DataTypes);
+  const RolePermission = sequelize.models.RolePermission;
 
   router.get('/', async (req, res) => {
-    const colePermissions = await RolePermission.findAll();
+    const colePermissions = await RolePermission.findAll({
+      include: [
+        { model: sequelize.models.Role },
+        { model: sequelize.models.Permission }
+      ]
+    });
     res.send(colePermissions);
   });
 
   router.get('/:id', async (req, res) => {
-    const colePermission = await RolePermission.findByPk(req.params.id);
+    const colePermission = await RolePermission.findByPk(req.params.id,{
+      include: [
+        { model: sequelize.models.Role },
+        { model: sequelize.models.Permission }
+      ]
+    });
     res.send(colePermission);
   });
 
@@ -35,7 +43,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, colePermission);
       res.status(202).send(colePermission);
     } catch (error) {
       res.status(400).send(error.message)

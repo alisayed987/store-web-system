@@ -23,8 +23,8 @@ module.exports = {
       }),
       price: 10000,
       discount: 0,
-      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     }, {
       order_id: 1,
       item_id: 2,
@@ -40,8 +40,8 @@ module.exports = {
       }),
       price: 14000,
       discount: 0,
-      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     },{
       order_id: 1,
       item_id: 3,
@@ -57,8 +57,8 @@ module.exports = {
       }),
       price: 6000,
       discount: 0,
-      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     }], {});
   },
 

@@ -24,13 +24,6 @@ module.exports = {
           key: "id"
         }
       },
-      room_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "rooms",
-          key: "id"
-        }
-      },
       description: {
         type: Sequelize.STRING,
         allowNull: true
@@ -55,11 +48,11 @@ module.exports = {
         defaultValue: 0,
         min: 0
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

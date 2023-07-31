@@ -1,18 +1,24 @@
-const RoomModel = require('../database/models/Room');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Room = RoomModel(sequelize, DataTypes);
+  const Room = sequelize.models.Room;
 
   router.get('/', async (req, res) => {
-    const rooms = await Room.findAll();
+    const rooms = await Room.findAll({
+      include: [
+        { model: sequelize.models.Category }
+      ]
+    });
     res.send(rooms);
   });
 
   router.get('/:id', async (req, res) => {
-    const room = await Room.findByPk(req.params.id);
+    const room = await Room.findByPk(req.params.id, {
+      include: [
+        { model: sequelize.models.Category }
+      ]
+    });
     res.send(room);
   });
 
@@ -35,7 +41,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, room);
       res.status(202).send(room);
     } catch (error) {
       res.status(400).send(error.message)

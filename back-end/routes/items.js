@@ -1,18 +1,27 @@
-const ItemModel = require('../database/models/Item');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Item = ItemModel(sequelize, DataTypes);
+  const Item = sequelize.models.Item;
 
   router.get('/', async (req, res) => {
-    const items = await Item.findAll();
+    const items = await Item.findAll({
+      include: [
+        { model: sequelize.models.Category},
+        { model: sequelize.models.Room},
+        { model: sequelize.models.Tag}
+      ]
+    });
     res.send(items);
   });
 
   router.get('/:id', async (req, res) => {
-    const item = await Item.findByPk(req.params.id);
+    const item = await Item.findByPk(req.params.id, {
+      include: [
+        { model: sequelize.models.Category },
+        { model: sequelize.models.Room }
+      ]
+    });
     res.send(item);
   });
 
@@ -35,7 +44,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, item);
       res.status(202).send(item);
     } catch (error) {
       res.status(400).send(error.message)

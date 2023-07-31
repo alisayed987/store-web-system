@@ -6,7 +6,6 @@ module.exports = {
     await queryInterface.bulkInsert('items', [{
       name: 'bed0',
       category_id: 1,
-      room_id: 1,
       description: "test description",
       dimentions: JSON.stringify({
         width: 160,
@@ -27,12 +26,11 @@ module.exports = {
       }),
       price: 10000,
       discount: 0,
-      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     }, {
       name: 'wardrobe',
       category_id: 1,
-      room_id: 1,
       description: "test description",
       dimentions: JSON.stringify({
         width: 160,
@@ -49,12 +47,11 @@ module.exports = {
       }),
       price: 14000,
       discount: 0,
-      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     },{
       name: 'commod',
       category_id: 1,
-      room_id: 1,
       description: "test description",
       dimentions: JSON.stringify({
         width: 50,
@@ -71,8 +68,8 @@ module.exports = {
       }),
       price: 6000,
       discount: 0,
-      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     }], {});
   },
 

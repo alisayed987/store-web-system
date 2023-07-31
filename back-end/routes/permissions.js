@@ -1,10 +1,8 @@
-const PermissionModel = require('../database/models/Permission');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Permission = PermissionModel(sequelize, DataTypes);
+  const Permission = sequelize.models.Permission;
 
   router.get('/', async (req, res) => {
     const permissions = await Permission.findAll();
@@ -35,7 +33,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, permission);
       res.status(202).send(permission);
     } catch (error) {
       res.status(400).send(error.message)

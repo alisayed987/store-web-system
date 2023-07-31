@@ -1,10 +1,8 @@
-const CategoryModel = require('../database/models/Category');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Category = CategoryModel(sequelize, DataTypes);
+  const Category = sequelize.models.Category;
 
   router.get('/', async (req, res) => {
     const categories = await Category.findAll();
@@ -35,7 +33,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, category);
       res.status(202).send(category);
     } catch (error) {
       res.status(400).send(error.message)

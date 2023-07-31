@@ -24,6 +24,7 @@ module.exports = function (app, sequelize) {
     app.use('/api/categories', categories(sequelize));
     app.use('/api/customers', customers(sequelize));
     app.use('/api/items', items(sequelize));
+    app.use('/api/rooms', rooms(sequelize));
     app.use('/api/order-types', orderTypes(sequelize));
     app.use('/api/orders', orders(sequelize));
     app.use('/api/permissions', permissions(sequelize));

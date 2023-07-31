@@ -4,16 +4,11 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      this.hasMany(models.itemtag)
-      this.belongsTo(models.category)
-      this.belongsTo(models.room)
-      this.belongsTo(models.orderitem)
+      this.belongsToMany(models.Tag, { through: models.ItemTag })
+      this.belongsTo(models.Category)
+      this.belongsToMany(models.Room, { through: models.RoomItem })
+      this.belongsToMany(models.Order, { through: models.OrderItem })
     }
   }
   Item.init({
@@ -35,13 +30,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       references: {
         model: "categories",
-        key: "id"
-      }
-    },
-    room_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "rooms",
         key: "id"
       }
     },
@@ -72,6 +60,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Item',
+    underscored: true
   });
   return Item;
 };

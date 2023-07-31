@@ -1,4 +1,4 @@
-const UserModel = require('../database/models/User');
+const UserModel = require('../database/models/user');
 const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
@@ -35,7 +35,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, user);
       res.status(202).send(user);
     } catch (error) {
       res.status(400).send(error.message)

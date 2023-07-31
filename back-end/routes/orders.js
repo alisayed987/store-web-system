@@ -1,18 +1,28 @@
-const OrderModel = require('../database/models/Order');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Order = OrderModel(sequelize, DataTypes);
 
+  const Order = sequelize.models.Order;
   router.get('/', async (req, res) => {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      include: [
+        { model: sequelize.models.Customer },
+        { model: sequelize.models.OrderType },
+        { model: sequelize.models.Item },
+        { model: sequelize.models.Room }
+      ]
+    });
     res.send(orders);
   });
 
   router.get('/:id', async (req, res) => {
-    const order = await Order.findByPk(req.params.id);
+    const order = await Order.findByPk(req.params.id, {
+      include: [
+        { model: sequelize.models.Customer },
+        { model: sequelize.models.OrderType }
+      ]
+    });
     res.send(order);
   });
 
@@ -35,7 +45,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, order);
       res.status(202).send(order);
     } catch (error) {
       res.status(400).send(error.message)

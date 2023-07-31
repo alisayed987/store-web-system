@@ -1,10 +1,8 @@
-const CustomerModel = require('../database/models/Customer');
-const { DataTypes } = require("sequelize");
 const express = require('express');
 const router = express.Router();
 
 module.exports = (sequelize) => {
-  const Customer = CustomerModel(sequelize, DataTypes);
+  const Customer = sequelize.models.Customer;
 
   router.get('/', async (req, res) => {
     const customers = await Customer.findAll();
@@ -35,7 +33,6 @@ module.exports = (sequelize) => {
             id: req.params.id
           }
         });
-        console.log(req.params.id, req.body, customer);
       res.status(202).send(customer);
     } catch (error) {
       res.status(400).send(error.message)

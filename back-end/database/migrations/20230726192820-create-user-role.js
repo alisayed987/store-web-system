@@ -2,39 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('rooms', {
+    await queryInterface.createTable('user_roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      image_url: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      category_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "categories",
+          model: "users",
           key: "id"
         }
       },
-      price: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-        defaultValue: 0,
-        min: 0
-      },
-      discount: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
-        defaultValue: 0,
-        min: 0
+      role_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "roles",
+          key: "id"
+        }
       },
       created_at: {
         allowNull: false,
@@ -47,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('rooms');
+    await queryInterface.dropTable('user_roles');
   }
 };

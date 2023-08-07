@@ -1,10 +1,11 @@
 const express = require('express');
+const auth = require('../middlewares/auth');
 const router = express.Router();
 
 module.exports = (sequelize) => {
 
   const Order = sequelize.models.Order;
-  router.get('/', async (req, res) => {
+  router.get('/', auth, async (req, res) => {
     const orders = await Order.findAll({
       include: [
         { model: sequelize.models.Customer },
@@ -16,7 +17,7 @@ module.exports = (sequelize) => {
     res.send(orders);
   });
 
-  router.get('/:id', async (req, res) => {
+  router.get('/:id', auth, async (req, res) => {
     const order = await Order.findByPk(req.params.id, {
       include: [
         { model: sequelize.models.Customer },
@@ -26,7 +27,7 @@ module.exports = (sequelize) => {
     res.send(order);
   });
 
-  router.post('/', async (req, res) => {
+  router.post('/', auth, async (req, res) => {
     try {
       const order = await Order.create(req.body)
       order.save();
@@ -36,7 +37,7 @@ module.exports = (sequelize) => {
     }
   });
 
-  router.put('/:id', async (req, res) => {
+  router.put('/:id', auth, async (req, res) => {
     try {
       const order = await Order.update(
         req.body,
@@ -51,7 +52,7 @@ module.exports = (sequelize) => {
     }
   });
 
-  router.delete('/:id', async (req, res) => {
+  router.delete('/:id', auth, async (req, res) => {
     try {
       const order = await Order.destroy({
         where: {

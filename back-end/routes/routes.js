@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('./auth');
 const categories = require('./categories');
 const items = require('./items');
 const orders = require('./orders');
@@ -11,6 +12,7 @@ const roles = require('./roles');
 const tags = require('./tags');
 const users = require('./users');
 const cors = require('cors')
+
 module.exports = function (app, sequelize) {
     app.use(express.json());
     app.use(cors({
@@ -21,6 +23,8 @@ module.exports = function (app, sequelize) {
             extended: true,
         })
     );
+
+    app.use('/', auth(sequelize));
     app.use('/api/categories', categories(sequelize));
     app.use('/api/customers', customers(sequelize));
     app.use('/api/items', items(sequelize));

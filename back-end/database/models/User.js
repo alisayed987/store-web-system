@@ -2,16 +2,29 @@
 const {
   Model
 } = require('sequelize');
+const jwt = require('jsonwebtoken');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    /**
+     * Register associations with the db instance connection
+     * @param {*} models 
+     */
     static associate(models) {
       this.hasMany(models.UserRole)
     }
 
+    /**
+     * Generate token for current user using id
+     * @returns string
+     */
     generateAuthToken() {
-      console.log(this);
-      const token = jwt.sign({ id: this.id }, process.env.SECRET);
-      return token;
+      try {
+        const token = jwt.sign({ id: this.id }, process.env.SECRET);
+        return token;
+      } catch (error) {
+        console.log('Error generating JWT: ', error);
+      }
     }
   }
   User.init({
